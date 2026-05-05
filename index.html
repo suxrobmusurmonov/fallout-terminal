@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROBCO OS v2.0</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="theme-green">
+    <div class="crt-overlay"></div>
+    
+    <div id="boot-screen">
+        <div id="boot-text"></div>
+        <span class="cursor-blink">_</span>
+    </div>
+
+    <div id="main-app" class="app-container hidden">
+        <header class="system-header">
+            <span>ROBCO OS v2.0.pro</span>
+            <span id="pwr-status">PWR: [|||||] 100%</span>
+        </header>
+
+        <main class="viewport">
+            <!-- ТЕРМИНАЛ -->
+            <section id="screen-term">
+                <div id="history-log"></div>
+                <div class="input-area">
+                    <div class="mobile-toolbar">
+                        <button onclick="insertChar('{')">{</button>
+                        <button onclick="insertChar('}')">}</button>
+                        <button onclick="insertChar('(')">(</button>
+                        <button onclick="insertChar(')')">)</button>
+                        <button onclick="insertChar(';')">;</button>
+                        <button onclick="runCode()" class="run-btn">RUN SYSTEM</button>
+                    </div>
+                    <div class="input-line">
+                        <span class="prompt">></span>
+                        <textarea id="main-input" rows="1" spellcheck="false" placeholder="Пиши код..."></textarea>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ВИЗУАЛИЗАТОР -->
+            <section id="screen-visual" class="hidden">
+                <div class="canvas-container">
+                    <canvas id="robco-canvas"></canvas>
+                </div>
+            </section>
+
+            <!-- AI-CORE -->
+            <section id="screen-ai" class="hidden">
+                <div id="ai-chat-log">
+                    <p class="sys-success">[V.N.A.I. ONLINE]</p>
+                </div>
+                <div class="input-line">
+                    <span class="prompt">?</span>
+                    <input type="text" id="ai-input" placeholder="Задай вопрос по JS..." autocomplete="off">
+                </div>
+            </section>
+
+            <!-- ПОЛНАЯ ДОКУМЕНТАЦИЯ -->
+            <section id="screen-docs" class="hidden">
+                <div id="docs-content">
+                    <h2 class="sys-success">JS REFERENCE CORE</h2>
+                    <div class="docs-grid" id="docs-grid">
+                        <!-- Сюда скрипт вставит данные -->
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="system-footer">
+            <button class="nav-btn active" onclick="switchTab('term', this)">TERM</button>
+            <button class="nav-btn" onclick="switchTab('visual', this)">VISUAL</button>
+            <button class="nav-btn" onclick="switchTab('ai', this)">AI-CORE</button>
+            <button class="nav-btn" onclick="switchTab('docs', this)">REF</button>
+            <button class="nav-btn" onclick="nextTheme()">STYLE</button>
+            <button class="nav-btn warn" onclick="location.reload()">REBOOT</button>
+        </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

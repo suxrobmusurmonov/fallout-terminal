@@ -1,0 +1,20 @@
+[
+  {
+    "cat": "VARIABLES",
+    "name": "let / const",
+    "desc": "let — изменяемая, const — только для чтения.",
+    "ex": "let x = 10; const y = 5;"
+  },
+  {
+    "cat": "CANVAS",
+    "name": "fillRect",
+    "desc": "Рисует закрашенный прямоугольник.",
+    "ex": "ctx.fillRect(10, 10, 100, 100);"
+  },
+  {
+    "cat": "UI",
+    "name": "triggerGlitch()",
+    "desc": "Вызывает визуальные помехи на экране.",
+    "ex": "triggerGlitch();"
+  }
+]
