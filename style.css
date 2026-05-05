@@ -6,7 +6,7 @@
     --text-glow: 0 0 10px rgba(24, 250, 127, 0.8), 0 0 2px rgba(24, 250, 127, 1);
 }
 
-/* Стили тем для STYLE кнопки */
+
 body.theme-orange { --f-main: #ffb642; --text-glow: 0 0 10px rgba(255, 182, 66, 0.8); }
 body.theme-white { --f-main: #ffffff; --text-glow: 0 0 10px rgba(255, 255, 255, 0.5); }
 body.theme-red { --f-main: #ff4444; --text-glow: 0 0 10px rgba(255, 68, 68, 0.8); }
@@ -109,7 +109,7 @@ button {
 .sys-error { color: #ff4444 !important; text-shadow: 0 0 10px #ff4444 !important; }
 .hidden { display: none !important; }
 
-/* Документация */
+
 #docs-content { overflow-y: auto; padding: 10px; border: 1px solid var(--f-main); }
 .doc-item { margin-bottom: 20px; border-bottom: 1px dashed var(--f-main); padding-bottom: 10px; }
 .doc-item h3 { margin: 0; color: var(--f-main); text-decoration: underline; }
@@ -119,14 +119,14 @@ button {
     padding: 20px; font-size: 1.6rem; text-shadow: var(--text-glow);
 }
 
-/* Жесткий шум и глитч */
+
 @keyframes noise-anim {
   0% { clip: rect(40px, 9999px, 56px, 0); transform: skew(0.65deg); }
   5% { clip: rect(12px, 9999px, 30px, 0); transform: skew(0.8deg); }
   10% { clip: rect(70px, 9999px, 85px, 0); transform: skew(0.1deg); }
   15% { clip: rect(30px, 9999px, 45px, 0); transform: skew(0.5deg); }
   20% { clip: rect(90px, 9999px, 100px, 0); transform: skew(0.9deg); }
-  /* Добавь больше шагов для хаотичности */
+
   100% { clip: rect(0, 9999px, 0, 0); transform: skew(0); }
 }
 
@@ -135,7 +135,7 @@ button {
     animation: screen-glitch 0.2s infinite;
 }
 
-/* Создаем эффект раздвоения (RGB Split) */
+
 .glitch-effect::before,
 .glitch-effect::after {
     content: attr(data-text);

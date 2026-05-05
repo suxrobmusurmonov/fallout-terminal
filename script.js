@@ -12,7 +12,7 @@ const elements = {
 
 const ctx = elements.canvas.getContext('2d');
 
-// --- 1. ТЕРМИНАЛ: ЧЕСТНЫЙ REPL (eval) ---
+
 function runCode() {
     const code = elements.input.value.trim();
     if (!code) return;
@@ -20,7 +20,7 @@ function runCode() {
     printLog(`> ${code}`, "user-input");
     
     try {
-        // Косвенный вызов eval для работы в глобальном контексте
+        
         const indirectEval = eval;
         const result = indirectEval(code);
         
@@ -30,21 +30,21 @@ function runCode() {
     } catch (err) {
         printLog(`SYS-ERR: ${err.message}`, "sys-error");
         explainError(err.message);
-        triggerGlitch(); // Глитч при ошибке
+        triggerGlitch(); 
     }
     
     elements.input.value = "";
     elements.input.style.height = 'auto';
 }
 
-// --- 2. ИИ: ЗАПРОС К VERCEL API ---
+
 async function handleAiQuery() {
     const query = elements.aiInput.value.trim();
     if (!query) return;
 
     printAiMsg(`USER: ${query}`, "");
     elements.aiInput.value = "";
-    triggerGlitch(); // Шум при отправке
+    triggerGlitch(); 
 
     try {
         const response = await fetch('/api/chat', {
@@ -65,12 +65,11 @@ async function handleAiQuery() {
     }
 }
 
-// --- 3. ЭФФЕКТЫ: ЖЕСТКИЙ ГЛИТЧ (ШУМ) ---
 function triggerGlitch() {
     const viewport = document.querySelector('.viewport');
     viewport.classList.add('glitch-effect');
     
-    // Добавляем атрибут для CSS-эффекта RGB Split
+    
     viewport.setAttribute('data-text', "ERROR_NOISE_SYSTEM_CRITICAL");
 
     setTimeout(() => {
@@ -79,12 +78,12 @@ function triggerGlitch() {
     }, 500); 
 }
 
-// Рандомные помехи (фоновый шум системы)
+
 setInterval(() => {
-    if (Math.random() < 0.03) triggerGlitch(); // Шанс 3% каждые 3 сек
+    if (Math.random() < 0.03) triggerGlitch(); 
 }, 3000);
 
-// --- 4. ДОКУМЕНТАЦИЯ (ИЗ JSON) ---
+
 async function renderDocs() {
     elements.docsGrid.innerHTML = "<p>Загрузка данных...</p>";
     try {
@@ -102,7 +101,7 @@ async function renderDocs() {
     }
 }
 
-// --- 5. ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ ---
+
 function typeAiText(text) {
     const p = document.createElement('p');
     p.className = "sys-success";
@@ -142,7 +141,7 @@ function explainError(msg) {
     printLog(advice, "sys-success");
 }
 
-// --- 6. ИНТЕРФЕЙС И НАВИГАЦИЯ ---
+
 function switchTab(id, btn) {
     document.querySelectorAll('section').forEach(s => s.classList.add('hidden'));
     const target = document.getElementById(`screen-${id}`);
@@ -161,7 +160,7 @@ function switchTab(id, btn) {
 function insertChar(c) {
     elements.input.value += c;
     elements.input.focus();
-    // Принудительно вызываем авто-расширение
+    
     elements.input.dispatchEvent(new Event('input'));
 }
 
@@ -171,13 +170,13 @@ function nextTheme() {
     document.body.classList.add(themes[currentThemeIdx]);
 }
 
-// Авто-расширение текстового поля
+
 elements.input.addEventListener('input', function() {
     this.style.height = 'auto';
     this.style.height = (this.scrollHeight) + 'px';
 });
 
-// Слушатели клавиш
+
 elements.input.addEventListener('keydown', e => {
     if (e.key === 'Enter' && !e.shiftKey) {
         e.preventDefault();
@@ -189,7 +188,7 @@ elements.aiInput.addEventListener('keydown', e => {
     if (e.key === 'Enter') handleAiQuery();
 });
 
-// Загрузочный экран
+
 window.onload = async () => {
     const boot = document.getElementById('boot-text');
     const lines = [
