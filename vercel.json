@@ -1,7 +1,7 @@
 {
   "functions": {
     "api/chat.js": {
-      "region": "iad1"
+      "regions": ["iad1"]
     }
   }
 }
