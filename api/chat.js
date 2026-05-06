@@ -7,7 +7,7 @@ export default async function handler(req, res) {
     const apiKey = process.env.GEMINI_API_KEY;
 
     if (!apiKey) {
-        return res.status(500).json({ text: "ОШИБКА: КЛЮЧ API НЕ НАЙДЕН." });
+        return res.status(500).json({ text: "ROBCO-AI: КЛЮЧ API ОТСУТСТВУЕТ." });
     }
 
     try {
@@ -15,7 +15,7 @@ export default async function handler(req, res) {
         
         
         const model = genAI.getGenerativeModel({ 
-            model: "gemini-1.5-flash" 
+            model: "models/gemini-1.5-flash" 
         });
 
         const prompt = `Ты — ИИ ROBCO OS. Отвечай кратко и сурово в стиле Fallout. Помогай с JS. Юзер: ${query}`;
@@ -26,11 +26,11 @@ export default async function handler(req, res) {
 
         res.status(200).json({ text: text });
     } catch (error) {
-        console.error("SYSTEM ERROR:", error);
+       
+        console.error("DETAILED ERROR:", error);
         
         res.status(500).json({ 
-            text: "ROBCO-AI: ОШИБКА ЯДРА. МОДЕЛЬ НЕ НАЙДЕНА ИЛИ ДОСТУП ОГРАНИЧЕН.",
-            details: error.message 
+            text: `ROBCO-AI: ОШИБКА ЯДРА. [${error.message.includes('location') ? 'РЕГИОН НЕ ПОДДЕРЖИВАЕТСЯ' : 'СБОЙ МОДЕЛИ'}]`
         });
     }
 }
