@@ -1,20 +1,14 @@
 [
-  {
-    "cat": "VARIABLES",
-    "name": "let / const",
-    "desc": "let — изменяемая, const — только для чтения.",
-    "ex": "let x = 10; const y = 5;"
-  },
-  {
-    "cat": "CANVAS",
-    "name": "fillRect",
-    "desc": "Рисует закрашенный прямоугольник.",
-    "ex": "ctx.fillRect(10, 10, 100, 100);"
-  },
-  {
-    "cat": "UI",
-    "name": "triggerGlitch()",
-    "desc": "Вызывает визуальные помехи на экране.",
-    "ex": "triggerGlitch();"
-  }
+  { "cat": "STRINGS", "name": ".length", "desc": "Возвращает длину строки.", "ex": "'Hello'.length; // 5" },
+  { "cat": "STRINGS", "name": ".toUpperCase()", "desc": "Делает все буквы заглавными.", "ex": "'robco'.toUpperCase(); // 'ROBCO'" },
+  { "cat": "STRINGS", "name": ".includes()", "desc": "Проверяет, есть ли подстрока в строке.", "ex": "'Fallout'.includes('out'); // true" },
+  { "cat": "ARRAYS", "name": ".push()", "desc": "Добавляет элемент в конец массива.", "ex": "arr.push('Stimpack');" },
+  { "cat": "ARRAYS", "name": ".pop()", "desc": "Удаляет последний элемент массива.", "ex": "arr.pop();" },
+  { "cat": "ARRAYS", "name": ".map()", "desc": "Создает новый массив, применяя функцию к каждому элементу.", "ex": "arr.map(x => x * 2);" },
+  { "cat": "ARRAYS", "name": ".filter()", "desc": "Оставляет только элементы, подходящие под условие.", "ex": "arr.filter(hp => hp > 0);" },
+  { "cat": "MATH", "name": "Math.floor()", "desc": "Округляет число вниз до целого.", "ex": "Math.floor(9.99); // 9" },
+  { "cat": "MATH", "name": "Math.max()", "desc": "Возвращает наибольшее из чисел.", "ex": "Math.max(1, 10, 5); // 10" },
+  { "cat": "OBJECTS", "name": "Object.keys()", "desc": "Возвращает массив всех ключей объекта.", "ex": "Object.keys(player);" },
+  { "cat": "ASYNC", "name": "fetch()", "desc": "Отправляет сетевой запрос к серверу.", "ex": "fetch('/api/data');" },
+  { "cat": "DOM", "name": "document.querySelector()", "desc": "Находит элемент на странице по CSS-селектору.", "ex": "document.querySelector('.nav');" }
 ]

@@ -152,15 +152,29 @@ function switchTab(id, btn) {
     
     if (id === 'docs') renderDocs();
     if (id === 'visual') {
-        elements.canvas.width = elements.canvas.parentElement.clientWidth;
-        elements.canvas.height = elements.canvas.parentElement.clientHeight;
+        
+        if (elements.canvas.width === 0 || elements.canvas.width === 300) { 
+            elements.canvas.width = elements.canvas.parentElement.clientWidth;
+            elements.canvas.height = elements.canvas.parentElement.clientHeight;
+        }
+        
+        ctx.fillStyle = getComputedStyle(document.body).getPropertyValue('--f-main');
+        ctx.strokeStyle = getComputedStyle(document.body).getPropertyValue('--f-main');
     }
 }
 
 function insertChar(c) {
-    elements.input.value += c;
+    const start = elements.input.selectionStart;
+    const end = elements.input.selectionEnd;
+    const text = elements.input.value;
+    
+    elements.input.value = text.slice(0, start) + c + text.slice(end);
     elements.input.focus();
     
+    
+    elements.input.selectionStart = elements.input.selectionEnd = start + c.length;
+
+ 
     elements.input.dispatchEvent(new Event('input'));
 }
 
