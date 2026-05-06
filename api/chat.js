@@ -14,20 +14,19 @@ export default async function handler(req, res) {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                
-                model: "llama3-8b-8192",
-                messages: [
-                    {
-                        role: "system",
-                        content: "Ты — ИИ терминала ROBCO INDUSTRIES. Твой стиль: Fallout, суровый, краткий, работаешь в 2077 году. Помогай с JavaScript."
-                    },
-                    {
-                        role: "user",
-                        content: query
-                    }
-                ],
-                max_tokens: 500
-            })
+    model: "llama-3.3-70b-versatile",
+    messages: [
+        {
+            role: "system",
+            content: "Ты — ИИ терминала ROBCO INDUSTRIES. Fallout-стиль, суровый, краткий. Помогай с JS."
+        },
+        {
+            role: "user",
+            content: query
+        }
+    ],
+    max_tokens: 500
+})
         });
 
         const data = await response.json();
