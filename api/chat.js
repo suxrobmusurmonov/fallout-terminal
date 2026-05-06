@@ -12,21 +12,17 @@ export default async function handler(req, res) {
         const genAI = new GoogleGenerativeAI(apiKey);
         
         
-        const model = genAI.getGenerativeModel({ 
-            model: "gemini-1.5-flash-latest" 
-        });
+        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-        const prompt = `Ты — ИИ терминала ROBCO INDUSTRIES. Отвечай кратко и сурово в стиле Fallout. Помогай с JS. Юзер: ${query}`;
+        const prompt = `Ты — ИИ терминала ROBCO INDUSTRIES. Fallout-стиль, сурово, кратко. Помогай с JS. Юзер: ${query}`;
 
         const result = await model.generateContent(prompt);
-        const response = await result.response;
+        const response = result.response;
         const text = response.text();
 
         res.status(200).json({ text });
     } catch (error) {
         console.error("DETAILED ERROR:", error);
-        
-        
         res.status(500).json({ 
             text: `ROBCO-AI: ОШИБКА ЯДРА. [КОД: ${error.status || 'API_ERR'}]`
         });
