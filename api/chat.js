@@ -1,19 +1,30 @@
+import { GoogleGenerativeAI } from "@google/generative-ai";
+
 export default async function handler(req, res) {
+    if (req.method !== 'POST') return res.status(405).json({ error: "Method not allowed" });
+
     const { query } = req.body;
     const apiKey = process.env.GEMINI_API_KEY;
 
+    if (!apiKey) {
+        return res.status(500).json({ text: "ОШИБКА: КЛЮЧ API НЕ НАЙДЕН В СИСТЕМЕ." });
+    }
+
     try {
-        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                contents: [{ parts: [{ text: `Ты — ИИ ROBCO OS. Отвечай кратко и сурово в стиле Fallout. Помогай с JS. Юзер: ${query}` }] }]
-            })
+        const genAI = new GoogleGenerativeAI(apiKey);
+        
+        const model = genAI.getGenerativeModel({ 
+            model: "gemini-1.5-flash",
+            systemInstruction: "Ты — ИИ ROBCO OS. Отвечай кратко и сурово в стиле Fallout. Помогай с JS.",
         });
 
-        const data = await response.json();
-        res.status(200).json({ text: data.candidates[0].content.parts[0].text });
+        const result = await model.generateContent(query);
+        const response = await result.response;
+        const text = response.text();
+
+        res.status(200).json({ text: text });
     } catch (error) {
-        res.status(500).json({ error: "Ошибка связи с ядром ИИ" });
+        console.error("SYSTEM ERROR:", error);
+        res.status(500).json({ text: "ROBCO-AI: КРИТИЧЕСКИЙ СБОЙ ЯДРА. ПРОВЕРЬТЕ ЛОГИ." });
     }
 }
