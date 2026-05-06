@@ -6,31 +6,29 @@ export default async function handler(req, res) {
     const { query } = req.body;
     const apiKey = process.env.GEMINI_API_KEY;
 
-    if (!apiKey) {
-        return res.status(500).json({ text: "ROBCO-AI: КЛЮЧ API ОТСУТСТВУЕТ." });
-    }
+    if (!apiKey) return res.status(500).json({ text: "ROBCO-AI: КЛЮЧ API ОТСУТСТВУЕТ." });
 
     try {
         const genAI = new GoogleGenerativeAI(apiKey);
         
         
         const model = genAI.getGenerativeModel({ 
-            model: "models/gemini-1.5-flash" 
+            model: "gemini-1.5-flash-latest" 
         });
 
-        const prompt = `Ты — ИИ ROBCO OS. Отвечай кратко и сурово в стиле Fallout. Помогай с JS. Юзер: ${query}`;
+        const prompt = `Ты — ИИ терминала ROBCO INDUSTRIES. Отвечай кратко и сурово в стиле Fallout. Помогай с JS. Юзер: ${query}`;
 
         const result = await model.generateContent(prompt);
         const response = await result.response;
         const text = response.text();
 
-        res.status(200).json({ text: text });
+        res.status(200).json({ text });
     } catch (error) {
-       
         console.error("DETAILED ERROR:", error);
         
+        
         res.status(500).json({ 
-            text: `ROBCO-AI: ОШИБКА ЯДРА. [${error.message.includes('location') ? 'РЕГИОН НЕ ПОДДЕРЖИВАЕТСЯ' : 'СБОЙ МОДЕЛИ'}]`
+            text: `ROBCO-AI: ОШИБКА ЯДРА. [КОД: ${error.status || 'API_ERR'}]`
         });
     }
 }
